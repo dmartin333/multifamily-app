@@ -1,0 +1,41 @@
+from setuptools import setup, find_packages
+
+setup(
+    name="multifamily-underwriting-saas",
+    version="1.0.0",
+    description="A comprehensive SaaS platform for multifamily real estate underwriting and analysis",
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
+    python_requires=">=3.11",
+    install_requires=[
+        "fastapi==0.104.1",
+        "uvicorn[standard]==0.24.0",
+        "python-multipart==0.0.6",
+        "sqlalchemy==2.0.23",
+        "alembic==1.12.1",
+        "psycopg2-binary==2.9.9",
+        "asyncpg==0.29.0",
+        "python-jose[cryptography]==3.3.0",
+        "passlib[bcrypt]==1.7.4",
+        "python-decouple==3.8",
+        "pandas==2.1.3",
+        "numpy==1.25.2",
+        "openpyxl==3.1.2",
+        "python-pptx==0.6.23",
+        "weasyprint==60.2",
+        "httpx==0.25.2",
+        "aiohttp==3.9.1",
+        "redis==5.0.1",
+        "prometheus-client==0.19.0",
+    ],
+    extras_require={
+        "dev": [
+            "pytest==7.4.3",
+            "pytest-asyncio==0.21.1",
+            "pytest-cov==4.1.0",
+            "black==23.11.0",
+            "isort==5.12.0",
+            "flake8==6.1.0",
+        ],
+    },
+) 
