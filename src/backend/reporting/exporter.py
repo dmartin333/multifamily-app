@@ -4,6 +4,7 @@ Reporting exporter for generating various output formats.
 
 from typing import Dict, Any
 import openpyxl
+from openpyxl.styles import Font, Alignment, PatternFill
 from io import BytesIO
 
 
@@ -23,38 +24,103 @@ def to_xlsx(data: Dict[str, Any]) -> bytes:
     try:
         # Create a new workbook
         workbook = openpyxl.Workbook()
-        worksheet = workbook.active
-        worksheet.title = "Report Summary"
+        
+        # Remove default sheet and create our own
+        workbook.remove(workbook.active)
+        
+        # Create Summary sheet
+        summary_sheet = workbook.create_sheet("Summary")
         
         # Write summary data if available
         if "summary" in data:
             summary = data["summary"]
             if isinstance(summary, dict):
+                # Add header
+                summary_sheet['A1'] = "Property Summary"
+                summary_sheet['A1'].font = Font(bold=True, size=14)
+                summary_sheet['A1'].fill = PatternFill(start_color="CCCCCC", end_color="CCCCCC", fill_type="solid")
+                
                 # Write key-value pairs
-                row = 1
+                row = 3
                 for key, value in summary.items():
-                    worksheet[f"A{row}"] = str(key)
-                    worksheet[f"B{row}"] = str(value)
+                    summary_sheet[f"A{row}"] = str(key)
+                    summary_sheet[f"B{row}"] = str(value)
+                    # Style the key column
+                    summary_sheet[f"A{row}"].font = Font(bold=True)
                     row += 1
             elif isinstance(summary, list):
+                # Add header
+                summary_sheet['A1'] = "Summary Data"
+                summary_sheet['A1'].font = Font(bold=True, size=14)
+                
                 # Write list data
-                for row_idx, item in enumerate(summary, 1):
+                for row_idx, item in enumerate(summary, 3):
                     if isinstance(item, dict):
                         for col_idx, (key, value) in enumerate(item.items(), 1):
-                            worksheet.cell(row=row_idx, column=col_idx, value=str(value))
+                            if row_idx == 3:  # Header row
+                                summary_sheet.cell(row=row_idx, column=col_idx, value=str(key))
+                                summary_sheet.cell(row=row_idx, column=col_idx).font = Font(bold=True)
+                            else:
+                                summary_sheet.cell(row=row_idx, column=col_idx, value=str(value))
                     else:
-                        worksheet.cell(row=row_idx, column=1, value=str(item))
+                        summary_sheet.cell(row=row_idx, column=1, value=str(item))
         
-        # Write other data sections
+        # Create Financial Metrics sheet
         if "financial_metrics" in data:
-            worksheet = workbook.create_sheet("Financial Metrics")
+            metrics_sheet = workbook.create_sheet("Financial Metrics")
             metrics = data["financial_metrics"]
+            
+            # Add header
+            metrics_sheet['A1'] = "Financial Metrics"
+            metrics_sheet['A1'].font = Font(bold=True, size=14)
+            metrics_sheet['A1'].fill = PatternFill(start_color="CCCCCC", end_color="CCCCCC", fill_type="solid")
+            
             if isinstance(metrics, dict):
-                row = 1
+                row = 3
                 for key, value in metrics.items():
-                    worksheet[f"A{row}"] = str(key)
-                    worksheet[f"B{row}"] = str(value)
+                    metrics_sheet[f"A{row}"] = str(key)
+                    metrics_sheet[f"B{row}"] = str(value)
+                    # Style the key column
+                    metrics_sheet[f"A{row}"].font = Font(bold=True)
                     row += 1
+        
+        # Create Cash Flow sheet if data exists
+        if "cash_flow" in data:
+            cashflow_sheet = workbook.create_sheet("Cash Flow")
+            cashflow = data["cash_flow"]
+            
+            # Add header
+            cashflow_sheet['A1'] = "Cash Flow Analysis"
+            cashflow_sheet['A1'].font = Font(bold=True, size=14)
+            cashflow_sheet['A1'].fill = PatternFill(start_color="CCCCCC", end_color="CCCCCC", fill_type="solid")
+            
+            if isinstance(cashflow, list) and len(cashflow) > 0:
+                # Write headers
+                headers = list(cashflow[0].keys())
+                for col_idx, header in enumerate(headers, 1):
+                    cashflow_sheet.cell(row=3, column=col_idx, value=str(header))
+                    cashflow_sheet.cell(row=3, column=col_idx).font = Font(bold=True)
+                
+                # Write data
+                for row_idx, item in enumerate(cashflow, 4):
+                    for col_idx, header in enumerate(headers, 1):
+                        value = item.get(header, "")
+                        cashflow_sheet.cell(row=row_idx, column=col_idx, value=str(value))
+        
+        # Auto-adjust column widths
+        for sheet in workbook.sheetnames:
+            worksheet = workbook[sheet]
+            for column in worksheet.columns:
+                max_length = 0
+                column_letter = column[0].column_letter
+                for cell in column:
+                    try:
+                        if len(str(cell.value)) > max_length:
+                            max_length = len(str(cell.value))
+                    except:
+                        pass
+                adjusted_width = min(max_length + 2, 50)
+                worksheet.column_dimensions[column_letter].width = adjusted_width
         
         # Save to bytes
         output = BytesIO()
