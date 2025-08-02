@@ -35,14 +35,19 @@ class TestParseProforma:
         # Mock workbook and named ranges
         mock_workbook = Mock()
         mock_defined_names = Mock()
-        mock_defined_names.definedName = [
-            Mock(name="Revenue"),
-            Mock(name="Expenses"),
-            Mock(name="NOI")
-        ]
         
-        # Mock the range values
-        mock_defined_names.__getitem__.side_effect = lambda x: f"value_{x}"
+        # Create mock defined names
+        mock_revenue = Mock()
+        mock_revenue.name = "Revenue"
+        mock_expenses = Mock()
+        mock_expenses.name = "Expenses"
+        mock_noi = Mock()
+        mock_noi.name = "NOI"
+        
+        mock_defined_names.definedName = [mock_revenue, mock_expenses, mock_noi]
+        
+        # Mock the range values using a dictionary
+        mock_defined_names.__getitem__ = Mock(side_effect=lambda x: f"value_{x}")
         mock_workbook.defined_names = mock_defined_names
         mock_load_workbook.return_value = mock_workbook
         

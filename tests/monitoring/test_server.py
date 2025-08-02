@@ -20,7 +20,7 @@ class TestMonitoringServer:
     def test_metrics_endpoint_content_type(self):
         """Test that /metrics endpoint returns text/plain content type."""
         response = client.get("/metrics")
-        assert response.headers["content-type"] == "text/plain"
+        assert response.headers["content-type"].startswith("text/plain")
     
     def test_metrics_endpoint_content(self):
         """Test that /metrics endpoint returns Prometheus-formatted content."""

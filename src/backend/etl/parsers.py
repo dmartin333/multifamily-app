@@ -22,11 +22,11 @@ def parse_csv(path: str) -> List[Dict[str, Any]]:
         FileNotFoundError: If the CSV file doesn't exist
         ValueError: If the file is not a valid CSV
     """
+    file_path = Path(path)
+    if not file_path.exists():
+        raise FileNotFoundError(f"CSV file not found: {path}")
+    
     try:
-        file_path = Path(path)
-        if not file_path.exists():
-            raise FileNotFoundError(f"CSV file not found: {path}")
-        
         data = []
         with open(file_path, 'r', newline='', encoding='utf-8') as csvfile:
             # Try to detect the dialect
@@ -45,8 +45,13 @@ def parse_csv(path: str) -> List[Dict[str, Any]]:
             reader = csv.reader(csvfile, dialect)
             
             if has_header:
-                # Read header row
-                headers = next(reader)
+                # Read header row - handle empty files
+                try:
+                    headers = next(reader)
+                except StopIteration:
+                    # Empty file, return empty list
+                    return []
+                
                 # Clean headers (remove whitespace, replace spaces with underscores)
                 headers = [h.strip().replace(' ', '_').lower() for h in headers]
                 
@@ -95,11 +100,11 @@ def parse_xlsx(path: str) -> List[Dict[str, Any]]:
         FileNotFoundError: If the XLSX file doesn't exist
         ValueError: If the file is not a valid XLSX
     """
+    file_path = Path(path)
+    if not file_path.exists():
+        raise FileNotFoundError(f"XLSX file not found: {path}")
+    
     try:
-        file_path = Path(path)
-        if not file_path.exists():
-            raise FileNotFoundError(f"XLSX file not found: {path}")
-        
         # Load the workbook
         workbook = openpyxl.load_workbook(file_path, data_only=True)
         

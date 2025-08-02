@@ -21,13 +21,13 @@ def test_auth_middleware_import():
     assert auth_middleware is not None
 
 
-def test_verify_jwt_token_stub(self):
+def test_verify_jwt_token_stub():
     """Test that verify_jwt_token returns None (stub implementation)."""
     result = verify_jwt_token("test_token")
     assert result is None
 
 
-def test_verify_saml_session_stub(self):
+def test_verify_saml_session_stub():
     """Test that verify_saml_session returns None (stub implementation)."""
     result = verify_saml_session({"session_id": "test_session"})
     assert result is None 

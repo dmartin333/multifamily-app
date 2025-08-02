@@ -77,6 +77,10 @@ def custom_openapi(app: FastAPI) -> Dict[str, Any]:
         "url": "https://example.com/logo.png"
     }
     
+    # Ensure components section exists
+    if "components" not in openapi_schema:
+        openapi_schema["components"] = {}
+    
     # Add security schemes
     openapi_schema["components"]["securitySchemes"] = {
         "OAuth2": {
