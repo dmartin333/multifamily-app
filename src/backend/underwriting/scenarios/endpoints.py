@@ -29,6 +29,53 @@ async def create_scenario(scenario_data: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
+@router.post("/clone/")
+async def clone_scenario_endpoint(base_id: str) -> Dict[str, Any]:
+    """
+    Clone an existing scenario.
+    
+    Args:
+        base_id: ID of the base scenario to clone
+        
+    Returns:
+        Cloned scenario information
+        
+    Raises:
+        HTTPException: If cloning fails
+    """
+    try:
+        return clone_scenario(base_id)
+    except NotImplementedError:
+        raise HTTPException(status_code=501, detail="Scenario cloning not yet implemented")
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error cloning scenario: {e}")
+
+
+@router.get("/{base_id}/compare/{alt_id}/")
+async def compare_scenarios_endpoint(base_id: str, alt_id: str) -> Dict[str, Any]:
+    """
+    Compare two scenarios and return analysis.
+    
+    Args:
+        base_id: ID of the base scenario
+        alt_id: ID of the alternative scenario
+        
+    Returns:
+        Comparison analysis results
+        
+    Raises:
+        HTTPException: If comparison fails
+    """
+    try:
+        return compare_scenarios(base_id, alt_id)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error comparing scenarios: {e}")
+
+
 @router.get("/{scenario_id}/compare/")
 async def compare_scenario(scenario_id: str) -> Dict[str, Any]:
     """

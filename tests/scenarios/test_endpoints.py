@@ -30,6 +30,40 @@ class TestScenarioEndpoints:
         assert data["status"] == "created"
         assert "scenario_123" in data["id"]
     
+    def test_clone_scenario_endpoint(self):
+        """Test scenario cloning endpoint."""
+        base_id = "test_base_scenario"
+        
+        response = client.post(f"/scenarios/clone/?base_id={base_id}")
+        assert response.status_code == 501  # Not implemented yet
+        
+        data = response.json()
+        assert "detail" in data
+        assert "not yet implemented" in data["detail"]
+    
+    def test_compare_scenarios_endpoint(self):
+        """Test scenario comparison endpoint."""
+        base_id = "test_base_scenario"
+        alt_id = "test_alt_scenario"
+        
+        response = client.get(f"/scenarios/{base_id}/compare/{alt_id}/")
+        assert response.status_code == 200
+        
+        data = response.json()
+        assert "differences" in data
+        assert isinstance(data["differences"], list)
+    
+    def test_compare_scenarios_with_different_ids(self):
+        """Test scenario comparison with different scenario IDs."""
+        base_id = "scenario_1"
+        alt_id = "scenario_2"
+        
+        response = client.get(f"/scenarios/{base_id}/compare/{alt_id}/")
+        assert response.status_code == 200
+        
+        data = response.json()
+        assert data["differences"] == []
+    
     def test_compare_scenario(self):
         """Test scenario comparison endpoint."""
         scenario_id = "test_scenario_123"
