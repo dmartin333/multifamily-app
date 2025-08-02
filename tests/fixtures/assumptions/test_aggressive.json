@@ -1,0 +1,14 @@
+{
+  "name": "Test Aggressive",
+  "description": "Test aggressive assumptions for unit testing",
+  "assumptions": {
+    "expense_ratio": 0.35,
+    "vacancy_rate": 0.03,
+    "management_fee": 0.03
+  },
+  "metadata": {
+    "created": "2024-01-15T10:00:00Z",
+    "version": "1.0",
+    "author": "Test"
+  }
+} 

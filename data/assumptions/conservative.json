@@ -1,0 +1,28 @@
+{
+  "name": "Conservative",
+  "description": "Conservative underwriting assumptions for risk-averse investors",
+  "assumptions": {
+    "expense_ratio": 0.45,
+    "vacancy_rate": 0.05,
+    "management_fee": 0.04,
+    "maintenance_reserve": 0.03,
+    "cap_ex_reserve": 0.02,
+    "rent_growth_rate": 0.02,
+    "expense_growth_rate": 0.025,
+    "exit_cap_rate": 0.065,
+    "holding_period": 5,
+    "acquisition_costs": 0.03,
+    "disposition_costs": 0.04,
+    "financing": {
+      "loan_to_value": 0.65,
+      "interest_rate": 0.055,
+      "amortization_period": 30,
+      "debt_service_coverage": 1.25
+    }
+  },
+  "metadata": {
+    "created": "2024-01-15T10:00:00Z",
+    "version": "1.0",
+    "author": "System"
+  }
+} 

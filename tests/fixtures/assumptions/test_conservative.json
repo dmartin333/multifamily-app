@@ -1,0 +1,14 @@
+{
+  "name": "Test Conservative",
+  "description": "Test conservative assumptions for unit testing",
+  "assumptions": {
+    "expense_ratio": 0.45,
+    "vacancy_rate": 0.05,
+    "management_fee": 0.04
+  },
+  "metadata": {
+    "created": "2024-01-15T10:00:00Z",
+    "version": "1.0",
+    "author": "Test"
+  }
+} 

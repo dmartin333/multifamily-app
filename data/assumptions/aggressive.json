@@ -1,0 +1,28 @@
+{
+  "name": "Aggressive",
+  "description": "Aggressive underwriting assumptions for growth-oriented investors",
+  "assumptions": {
+    "expense_ratio": 0.35,
+    "vacancy_rate": 0.03,
+    "management_fee": 0.03,
+    "maintenance_reserve": 0.02,
+    "cap_ex_reserve": 0.015,
+    "rent_growth_rate": 0.04,
+    "expense_growth_rate": 0.02,
+    "exit_cap_rate": 0.055,
+    "holding_period": 3,
+    "acquisition_costs": 0.025,
+    "disposition_costs": 0.035,
+    "financing": {
+      "loan_to_value": 0.75,
+      "interest_rate": 0.05,
+      "amortization_period": 30,
+      "debt_service_coverage": 1.15
+    }
+  },
+  "metadata": {
+    "created": "2024-01-15T10:00:00Z",
+    "version": "1.0",
+    "author": "System"
+  }
+} 
