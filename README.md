@@ -28,6 +28,8 @@ multifamily_acquisitions_automator/
 │       ├── components/           # Reusable UI Components
 │       ├── i18n/                 # Internationalization
 │       └── pages/                # Route Components
+├── data/                         # Application Data
+│   └── assumptions/              # Underwriting Assumption Sets
 ├── templates/report/             # Report Templates
 ├── tests/                        # Comprehensive Test Suite
 ├── .github/workflows/            # CI/CD Pipeline
@@ -37,31 +39,31 @@ multifamily_acquisitions_automator/
 
 ## 🚀 Core Features
 
-### **Financial Analysis**
+### **Financial Analysis** ✅
 - ✅ Pro-forma modeling and analysis
 - ✅ Scenario comparison and sensitivity testing
 - ✅ IRR, NPV, and cash flow calculations
 - ✅ Assumption management and validation
 
-### **Data Management**
+### **Data Management** ✅
 - ✅ Multi-format file import (CSV, XLSX, PDF)
 - ✅ External data source integration (CoStar, Yardi, BLS, Salesforce)
 - ✅ Real-time data synchronization
 - ✅ Data validation and quality checks
 
-### **Reporting & Export**
-- ✅ Excel export with openpyxl
+### **Reporting & Export** ✅
+- ✅ Excel export with openpyxl (XLSX format)
 - ✅ PDF export (WeasyPrint/Puppeteer ready)
 - ✅ PowerPoint export (python-pptx ready)
 - ✅ Customizable report templates
 
-### **Team Collaboration**
+### **Team Collaboration** ✅
 - ✅ Real-time commenting and annotations
 - ✅ Model sharing and version control
 - ✅ Team-based access controls
 - ✅ Activity tracking and audit trails
 
-### **Enterprise Features**
+### **Enterprise Features** ✅
 - ✅ OAuth2 and SAML authentication
 - ✅ Role-based permissions
 - ✅ Audit logging and compliance
@@ -144,7 +146,8 @@ The API is fully documented with OpenAPI/Swagger:
 ### **Key Endpoints**
 
 - `POST /scenarios/` - Create underwriting scenarios
-- `GET /scenarios/{id}/compare/` - Compare scenarios
+- `POST /scenarios/clone/` - Clone existing scenarios
+- `GET /scenarios/{base_id}/compare/{alt_id}/` - Compare two scenarios
 - `POST /comments/` - Add collaboration comments
 - `GET /metrics` - Prometheus metrics
 - `GET /health` - Health check
@@ -169,14 +172,11 @@ npm test
 npm run lint
 ```
 
-### **Integration Tests**
-```bash
-# Test API endpoints
-pytest tests/ -m "integration"
-
-# Test Docker containers
-docker-compose -f docker-compose.test.yml up --abort-on-container-exit
-```
+### **CI/CD Pipeline**
+The project includes automated testing via GitHub Actions:
+- Runs on every push to `main` branch
+- Tests both frontend (npm ci, lint, test) and backend (pip install, pytest)
+- Fails the job if any step errors
 
 ## 📈 Monitoring & Observability
 
@@ -208,7 +208,15 @@ ENVIRONMENT=production
 # External APIs
 COSTAR_API_KEY=your_costar_key
 YARDI_API_KEY=your_yardi_key
+BLS_API_KEY=your_bls_key
+SALESFORCE_API_KEY=your_salesforce_key
 ```
+
+### **Assumption Sets**
+The platform includes pre-configured assumption sets in `data/assumptions/`:
+- **Conservative**: Risk-averse underwriting assumptions
+- **Moderate**: Balanced risk-return profiles
+- **Aggressive**: Growth-oriented assumptions
 
 ### **Docker Configuration**
 - Multi-stage builds for optimization
@@ -228,7 +236,7 @@ docker-compose up -d --scale app=3
 ```
 
 ### **CI/CD Pipeline**
-- Automated testing on pull requests
+- Automated testing on push to main
 - Code quality checks
 - Security scanning
 - Automated deployment
@@ -252,7 +260,11 @@ docker-compose up -d --scale app=3
 ### **Phase 1: Core Platform** ✅
 - [x] Basic underwriting engine
 - [x] Data import capabilities
-- [x] Reporting system
+- [x] Reporting system (XLSX export)
+- [x] External API integrations (CoStar, BLS, Salesforce, Yardi)
+- [x] Assumption management system
+- [x] Scenario comparison and cloning
+- [x] CI/CD pipeline
 - [x] User authentication
 - [x] Team collaboration
 
@@ -260,8 +272,9 @@ docker-compose up -d --scale app=3
 - [ ] Machine learning models
 - [ ] Advanced analytics
 - [ ] Mobile application
-- [ ] Third-party integrations
-- [ ] Advanced reporting
+- [ ] Enhanced third-party integrations
+- [ ] Advanced reporting (PDF, PowerPoint)
+- [ ] Real-time collaboration features
 
 ### **Phase 3: Enterprise Features** 📋
 - [ ] Multi-tenant architecture
