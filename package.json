@@ -1,0 +1,19 @@
+{
+  "name": "multifamily-underwriting-saas",
+  "version": "1.0.0",
+  "description": "A comprehensive SaaS platform for multifamily real estate underwriting and analysis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "multifamily",
+    "underwriting",
+    "real-estate",
+    "saas"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {}
+} 
