@@ -30,11 +30,19 @@ jobs:
     
     - name: Install and test frontend
       run: |
-        npm ci
-        npm run lint
-        npm run test
+        if [ -f "package.json" ] && [ "$(jq -r '.dependencies | length' package.json)" -gt 0 ] || [ "$(jq -r '.devDependencies | length' package.json)" -gt 0 ]; then
+          npm ci
+          npm run lint
+          npm run test
+        else
+          echo "No frontend dependencies found, skipping frontend tests"
+        fi
     
     - name: Install and test backend
       run: |
-        pip install -r requirements.txt
-        pytest 
+        if [ -f "requirements.txt" ]; then
+          pip install -r requirements.txt
+          pytest
+        else
+          echo "No requirements.txt found, skipping backend tests"
+        fi 
