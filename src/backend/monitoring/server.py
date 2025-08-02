@@ -4,7 +4,7 @@ Monitoring server with Prometheus metrics endpoint and middleware.
 
 import time
 from fastapi import FastAPI, Request, Response
-from fastapi.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from .metrics import inc_request, observe_latency, get_metrics
 
 
