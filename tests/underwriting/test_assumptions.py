@@ -7,7 +7,7 @@ import pytest
 import tempfile
 import shutil
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 from backend.underwriting.assumptions.service import load_assumptions, list_assumption_sets
 from backend.underwriting.assumptions.models import Assumption
 
@@ -52,8 +52,10 @@ class TestAssumptionService:
     def test_load_assumptions_success(self, temp_assumptions_dir):
         """Test that load_assumptions successfully loads assumption data."""
         with patch('backend.underwriting.assumptions.service.Path') as mock_path:
-            # Mock the path to point to our temp directory
-            mock_path.return_value.parent.parent.parent.parent.parent = temp_assumptions_dir.parent
+            # Create a mock path that returns the correct parent structure
+            mock_path_instance = Mock()
+            mock_path_instance.parent.parent.parent.parent.parent = temp_assumptions_dir.parent
+            mock_path.return_value = mock_path_instance
             
             result = load_assumptions("conservative")
             
@@ -64,7 +66,10 @@ class TestAssumptionService:
     def test_load_assumptions_not_found(self, temp_assumptions_dir):
         """Test that load_assumptions raises ValueError for non-existent assumption set."""
         with patch('backend.underwriting.assumptions.service.Path') as mock_path:
-            mock_path.return_value.parent.parent.parent.parent.parent = temp_assumptions_dir.parent
+            # Create a mock path that returns the correct parent structure
+            mock_path_instance = Mock()
+            mock_path_instance.parent.parent.parent.parent.parent = temp_assumptions_dir.parent
+            mock_path.return_value = mock_path_instance
             
             with pytest.raises(ValueError, match="Assumption set 'nonexistent' not found"):
                 load_assumptions("nonexistent")
@@ -77,7 +82,10 @@ class TestAssumptionService:
             f.write("{ invalid json content")
         
         with patch('backend.underwriting.assumptions.service.Path') as mock_path:
-            mock_path.return_value.parent.parent.parent.parent.parent = temp_assumptions_dir.parent
+            # Create a mock path that returns the correct parent structure
+            mock_path_instance = Mock()
+            mock_path_instance.parent.parent.parent.parent.parent = temp_assumptions_dir.parent
+            mock_path.return_value = mock_path_instance
             
             with pytest.raises(ValueError, match="Invalid JSON in assumption set 'invalid'"):
                 load_assumptions("invalid")
@@ -85,7 +93,10 @@ class TestAssumptionService:
     def test_list_assumption_sets_success(self, temp_assumptions_dir):
         """Test that list_assumption_sets returns all available assumption sets."""
         with patch('backend.underwriting.assumptions.service.Path') as mock_path:
-            mock_path.return_value.parent.parent.parent.parent.parent = temp_assumptions_dir.parent
+            # Create a mock path that returns the correct parent structure
+            mock_path_instance = Mock()
+            mock_path_instance.parent.parent.parent.parent.parent = temp_assumptions_dir.parent
+            mock_path.return_value = mock_path_instance
             
             result = list_assumption_sets()
             
@@ -95,8 +106,10 @@ class TestAssumptionService:
     def test_list_assumption_sets_empty_directory(self):
         """Test that list_assumption_sets returns empty list when directory doesn't exist."""
         with patch('backend.underwriting.assumptions.service.Path') as mock_path:
-            # Mock path to non-existent directory
-            mock_path.return_value.parent.parent.parent.parent.parent = Path("/nonexistent")
+            # Create a mock path that returns a non-existent directory
+            mock_path_instance = Mock()
+            mock_path_instance.parent.parent.parent.parent.parent = Path("/nonexistent")
+            mock_path.return_value = mock_path_instance
             
             result = list_assumption_sets()
             assert result == []
@@ -108,7 +121,10 @@ class TestAssumptionService:
             json_file.unlink()
         
         with patch('backend.underwriting.assumptions.service.Path') as mock_path:
-            mock_path.return_value.parent.parent.parent.parent.parent = temp_assumptions_dir.parent
+            # Create a mock path that returns the correct parent structure
+            mock_path_instance = Mock()
+            mock_path_instance.parent.parent.parent.parent.parent = temp_assumptions_dir.parent
+            mock_path.return_value = mock_path_instance
             
             result = list_assumption_sets()
             assert result == []
