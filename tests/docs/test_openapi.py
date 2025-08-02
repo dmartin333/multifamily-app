@@ -5,7 +5,7 @@ Tests for OpenAPI documentation endpoints.
 import pytest
 import json
 from fastapi.testclient import TestClient
-from src.backend.docs.openapi import custom_openapi
+from backend.docs.openapi import custom_openapi
 from fastapi import FastAPI
 
 

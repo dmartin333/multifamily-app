@@ -3,7 +3,7 @@ Tests for collaboration service.
 """
 
 import pytest
-from src.backend.collaboration.service import add_comment, list_comments
+from backend.collaboration.service import add_comment, list_comments
 
 
 def test_add_comment_import():
@@ -18,7 +18,7 @@ def test_list_comments_import():
 
 def test_add_comment_not_implemented():
     """Test that add_comment raises NotImplementedError."""
-    from src.backend.collaboration.models import Comment
+    from backend.collaboration.models import Comment
     
     comment = Comment(
         id="test_id",

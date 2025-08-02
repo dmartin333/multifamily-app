@@ -3,7 +3,7 @@ Tests for Salesforce integration.
 """
 
 import pytest
-from src.backend.integrations.salesforce import fetch_salesforce
+from backend.integrations.salesforce import fetch_salesforce
 
 
 def test_salesforce_import():

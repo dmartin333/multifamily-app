@@ -3,7 +3,7 @@ Tests for BLS integration.
 """
 
 import pytest
-from src.backend.integrations.bls import fetch_bls
+from backend.integrations.bls import fetch_bls
 
 
 def test_bls_import():

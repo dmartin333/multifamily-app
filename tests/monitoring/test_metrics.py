@@ -3,7 +3,7 @@ Tests for monitoring metrics.
 """
 
 import pytest
-from src.backend.monitoring.metrics import (
+from backend.monitoring.metrics import (
     inc_request, 
     observe_latency, 
     inc_underwriting_model,

@@ -3,7 +3,7 @@ Tests for CoStar integration.
 """
 
 import pytest
-from src.backend.integrations.costar import fetch_costar
+from backend.integrations.costar import fetch_costar
 
 
 def test_costar_import():

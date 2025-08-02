@@ -8,8 +8,8 @@ import tempfile
 import shutil
 from pathlib import Path
 from unittest.mock import patch
-from src.backend.underwriting.assumptions.service import load_assumptions, list_assumption_sets
-from src.backend.underwriting.assumptions.models import Assumption
+from backend.underwriting.assumptions.service import load_assumptions, list_assumption_sets
+from backend.underwriting.assumptions.models import Assumption
 
 
 class TestAssumptionService:

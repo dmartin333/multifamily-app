@@ -3,7 +3,7 @@ Tests for scenario logic functions.
 """
 
 import pytest
-from src.backend.underwriting.scenarios.logic import clone_scenario, compare_scenarios
+from backend.underwriting.scenarios.logic import clone_scenario, compare_scenarios
 
 
 class TestScenarioLogic:

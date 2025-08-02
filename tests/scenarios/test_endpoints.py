@@ -4,7 +4,7 @@ Tests for scenario endpoints.
 
 import pytest
 from fastapi.testclient import TestClient
-from src.backend.underwriting.scenarios.endpoints import router
+from backend.underwriting.scenarios.endpoints import router
 from fastapi import FastAPI
 
 app = FastAPI()

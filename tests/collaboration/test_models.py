@@ -3,7 +3,7 @@ Tests for collaboration models.
 """
 
 import pytest
-from src.backend.collaboration.models import Comment
+from backend.collaboration.models import Comment
 
 
 def test_comment_import():

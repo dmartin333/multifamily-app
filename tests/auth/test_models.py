@@ -3,7 +3,7 @@ Tests for authentication models.
 """
 
 import pytest
-from src.backend.auth.models import User
+from backend.auth.models import User
 
 
 def test_user_import():

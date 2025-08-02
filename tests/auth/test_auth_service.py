@@ -3,7 +3,7 @@ Tests for authentication service.
 """
 
 import pytest
-from src.backend.auth.auth_service import login_oauth2, verify_saml_assertion
+from backend.auth.auth_service import login_oauth2, verify_saml_assertion
 
 
 def test_login_oauth2_import():

@@ -4,7 +4,7 @@ Tests for monitoring server.
 
 import pytest
 from fastapi.testclient import TestClient
-from src.backend.monitoring.server import monitoring_app
+from backend.monitoring.server import monitoring_app
 
 client = TestClient(monitoring_app)
 

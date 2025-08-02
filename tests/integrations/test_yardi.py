@@ -3,7 +3,7 @@ Tests for Yardi integration.
 """
 
 import pytest
-from src.backend.integrations.yardi import fetch_yardi
+from backend.integrations.yardi import fetch_yardi
 
 
 def test_yardi_import():

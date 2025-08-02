@@ -4,7 +4,7 @@ Tests for collaboration endpoints.
 
 import pytest
 from fastapi.testclient import TestClient
-from src.backend.collaboration.endpoints import router
+from backend.collaboration.endpoints import router
 from fastapi import FastAPI
 
 app = FastAPI()

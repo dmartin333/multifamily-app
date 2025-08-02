@@ -3,7 +3,7 @@ Tests for authentication middleware.
 """
 
 import pytest
-from src.backend.auth.middleware import verify_jwt_token, verify_saml_session, auth_middleware
+from backend.auth.middleware import verify_jwt_token, verify_saml_session, auth_middleware
 
 
 def test_verify_jwt_token_import():

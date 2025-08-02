@@ -8,7 +8,7 @@ import os
 import csv
 import openpyxl
 from pathlib import Path
-from src.backend.etl.parsers import parse_csv, parse_xlsx, parse_pdf
+from backend.etl.parsers import parse_csv, parse_xlsx, parse_pdf
 
 
 class TestParsers:

@@ -6,7 +6,7 @@ import pytest
 import tempfile
 import os
 from unittest.mock import Mock, patch
-from src.backend.underwriting.loader import parse_proforma
+from backend.underwriting.loader import parse_proforma
 
 
 class TestParseProforma:

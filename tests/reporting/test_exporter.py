@@ -5,7 +5,7 @@ Tests for reporting exporter functions.
 import pytest
 import openpyxl
 from io import BytesIO
-from src.backend.reporting.exporter import to_xlsx, to_pdf, to_pptx
+from backend.reporting.exporter import to_xlsx, to_pdf, to_pptx
 
 
 class TestExporter:
