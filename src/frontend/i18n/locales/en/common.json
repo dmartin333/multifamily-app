@@ -1,0 +1,79 @@
+{
+  "navbar": {
+    "projects": "Projects",
+    "dataImport": "Data Import",
+    "modeling": "Modeling",
+    "scenarios": "Scenarios",
+    "reports": "Reports",
+    "collaboration": "Collaboration",
+    "admin": "Admin"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "dataImport": "Data Import",
+    "modeling": "Modeling",
+    "scenarios": "Scenarios",
+    "reports": "Reports",
+    "collaboration": "Collaboration",
+    "admin": "Admin"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import"
+  },
+  "underwriting": {
+    "title": "Multifamily Underwriting",
+    "propertyName": "Property Name",
+    "purchasePrice": "Purchase Price",
+    "irr": "IRR",
+    "npv": "NPV",
+    "capRate": "Cap Rate",
+    "cashOnCash": "Cash on Cash",
+    "debtServiceCoverage": "Debt Service Coverage",
+    "totalUnits": "Total Units",
+    "averageRent": "Average Rent",
+    "operatingExpenses": "Operating Expenses",
+    "netOperatingIncome": "Net Operating Income"
+  },
+  "scenarios": {
+    "title": "Scenarios",
+    "createScenario": "Create Scenario",
+    "compareScenarios": "Compare Scenarios",
+    "baseScenario": "Base Scenario",
+    "alternativeScenario": "Alternative Scenario",
+    "scenarioName": "Scenario Name",
+    "scenarioDescription": "Scenario Description"
+  },
+  "reports": {
+    "title": "Reports",
+    "generateReport": "Generate Report",
+    "exportFormat": "Export Format",
+    "excel": "Excel",
+    "pdf": "PDF",
+    "powerpoint": "PowerPoint",
+    "reportType": "Report Type",
+    "underwritingSummary": "Underwriting Summary",
+    "cashFlowAnalysis": "Cash Flow Analysis",
+    "sensitivityAnalysis": "Sensitivity Analysis"
+  },
+  "collaboration": {
+    "title": "Collaboration",
+    "comments": "Comments",
+    "addComment": "Add Comment",
+    "reply": "Reply",
+    "editComment": "Edit Comment",
+    "deleteComment": "Delete Comment",
+    "mentionUser": "Mention User"
+  }
+} 
